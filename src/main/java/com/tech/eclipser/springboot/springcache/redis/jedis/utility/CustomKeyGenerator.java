@@ -36,7 +36,6 @@ public class CustomKeyGenerator implements KeyGenerator {
                     sb.append(":");
                     sb.append(employee.getFirstName());
                     return sb.toString();
-                    // return new SecurityAttrCacheKey(securityAttr.getSpnField());
                 }
                 if (o instanceof Department) {
                     Department department = (Department) o;
@@ -44,7 +43,6 @@ public class CustomKeyGenerator implements KeyGenerator {
                             .append(":")
                             .append(department.getDepartmentName());
                     return sb.toString();
-                    // return new SecurityAttrCacheKey(securityAttrCacheKey.getSpnField());
                 }
             }
         }

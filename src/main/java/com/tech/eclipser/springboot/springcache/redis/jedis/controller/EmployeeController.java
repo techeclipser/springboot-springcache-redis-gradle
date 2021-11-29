@@ -25,7 +25,7 @@ public class EmployeeController {
 
     @GetMapping("/employee/{employeeId}")
     public Employee getEmployee(@PathVariable(value = "employeeId") Integer employeeId){
-       return employeeService.getEmployee(employeeId);
+        return employeeService.getEmployee(employeeId);
     }
 
     @PostMapping("/employee")
@@ -36,6 +36,8 @@ public class EmployeeController {
     @PutMapping("/employee/{employeeId}")
     public void update(@PathVariable(value = "employeeId") Integer employeeId, @Valid @RequestBody Employee employee) {
         employeeService.updateEmployee(employeeId,employee);
+        employeeService.clearEmployeeFromCache(employee);
+        employeeService.insertEmployeeCache(employee);
     }
 
     @PostMapping("/clearEmployee")

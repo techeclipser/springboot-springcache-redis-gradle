@@ -20,7 +20,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Cacheable(value = "employee")
     public Employee getEmployee(final Integer employeeId) {
-        return  employeeMapper.getEmployeeById(employeeId).get(0);
+        List<Employee> employees= employeeMapper.getEmployeeById(employeeId);
+        if(employees!=null)
+            return employees.get(0);
+        return null;
     }
 
     @CachePut(cacheNames = "employee",keyGenerator="customKeyGenerator")
@@ -42,7 +45,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Integer employeeId, Employee employee) {
-        employeeMapper.updateEmployee(employee);
+        Employee checkEmployee=getEmployee(employeeId);
+        if(checkEmployee!=null)
+            employeeMapper.updateEmployee(employee);
     }
 
     public List<Employee> getAllEmployee() {
